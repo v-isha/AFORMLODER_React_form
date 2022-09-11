@@ -34,9 +34,18 @@ const [error, setError] = useState({
 
 // checkbox
 const getPjl = (e) => {
-  let data = pjl
-  data.push(e.target.value)
-  setPjl(data)
+    const {value,checked} =e.target
+    if(checked){
+      setPjl([...pjl,value])
+
+    }
+    else{
+      setPjl(pjl.filter((e)=>e !== value))
+    }
+
+
+
+
 }
 
 // clearform
@@ -79,8 +88,8 @@ const handleSubmit = (e)=>{
       console.log(data.get('pimage'))
       console.log(data.get('rdoc'))
       setError({ status: true, msg: "Resume Uploaded Successfully", type: 'success' })
-      document.getElementById("resume-form").reset()
       resetForm()
+      document.getElementById("resume-form").reset()
     }
     else{
       setError({ status: true, msg: "All Fields are Required", type: 'error' })
